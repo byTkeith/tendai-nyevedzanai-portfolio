@@ -4,13 +4,13 @@ import { PortfolioData } from './types';
 export const portfolioData: PortfolioData = {
   name: "Tendai K. Nyevedzanai",
   title: "Software Engineer & Solutions Consultant",
-  summary: "High-value Engineer specializing in bridging legacy business systems with modern AI architectures. Proven track record in delivering measurable ROI, including 20% revenue preservation and 40% efficiency gains through strategic software consulting.",
+  summary: "High-value Software Engineer specializing in bridging legacy business systems with modern AI architectures. Proven track record in delivering measurable ROI, including 20% revenue preservation and 40% efficiency gains through strategic software consultancy and full-stack engineering.",
   yearsOfExperience: "Professional Engineering & Consultancy",
   skills: {
     programming: ["Python (Django)", "Java", "C#", "JavaScript (React)", "SQL"],
     erp: ["SAP S/4HANA Private Cloud Practitioner", "SAP HR/Payroll", "S4HANA Process Optimization"],
-    tools: ["REST Framework", "Google Cloud API", "Vercel", "Git", "PostgreSQL"],
-    business: ["Process Improvement", "ROI Analysis", "Workflow Automation", "Problem Analysis"]
+    tools: ["REST Framework", "Google Cloud API", "Vercel", "Git", "PostgreSQL", "Tailwind CSS"],
+    business: ["Process Improvement", "ROI Analysis", "Workflow Automation", "Problem Analysis", "Technical Consultancy"]
   },
   experience: [
     {
@@ -23,7 +23,8 @@ export const portfolioData: PortfolioData = {
       description: [
         "Architecting Python-based automation frameworks for high-growth SMEs.",
         "Optimizing complex business logic to handle scalable data structures.",
-        "Consulting on digital transformation roadmaps for industrial stakeholders."
+        "Consulting on digital transformation roadmaps for industrial stakeholders.",
+        "Implementing automated reporting tools to track key performance indicators across distributed teams."
       ]
     },
     {
@@ -34,8 +35,8 @@ export const portfolioData: PortfolioData = {
       duration: "December 2024",
       description: [
         "Preserved 20% of annual revenue by engineering a mission-critical API to migrate legacy flat-files to MySQL.",
-        "Implemented real-time data analysis capabilities for executive decision-making.",
-        "Conducted deep process analysis to identify and eliminate operational leakage."
+        "Eliminated data silos that previously hindered decision-making and live analysis.",
+        "Improved executive decision-making turnaround time by providing a live, queryable database environment."
       ]
     },
     {
@@ -45,9 +46,9 @@ export const portfolioData: PortfolioData = {
       location: "Cape Town",
       duration: "2024",
       description: [
-        "Led project for City of Cape Town focused on process improvement and problem analysis.",
-        "Redesigned the SAP HR sick leave workflow, cutting turnaround time by 40%.",
-        "Applied software consultancy principles to resolve deep-seated monthly backlogs."
+        "Led process improvement analysis focusing on deep-seated workflow bottlenecks.",
+        "Redesigned the SAP HR sick leave workflow, cutting turnaround time by 40% for city-wide personnel management.",
+        "Applied problem analysis principles as a software consultant to resolve monthly backlogs."
       ]
     },
     {
@@ -59,7 +60,7 @@ export const portfolioData: PortfolioData = {
       description: [
         "Developed interactive game mechanics and backend logic for educational platforms.",
         "Optimized software performance for educational media in an Agile environment.",
-        "Engineered Twitch-integrated social gaming elements."
+        "Engineered Twitch-integrated social gaming elements, improving user engagement metrics."
       ],
       link: "https://www.twitch.tv/sozolabs",
       linkText: "View Game on Twitch"
@@ -71,9 +72,9 @@ export const portfolioData: PortfolioData = {
       location: "Sandton",
       duration: "2024",
       description: [
-        "Designed and deployed an AI-driven guest relations engine.",
+        "Designed and deployed an AI-driven guest relations engine reducing manual inquiry response time.",
         "Engineered a secure administrative dashboard for price, description, and inventory management.",
-        "Modernized the brand's digital presence with a mobile-first, refined UI."
+        "Modernized the brand's digital presence with a mobile-first, refined UI compliant with current industry standards."
       ]
     }
   ],
@@ -81,28 +82,28 @@ export const portfolioData: PortfolioData = {
     {
       id: "ai-reader",
       title: "AI Literacy & Pronunciation Tutor",
-      description: "Capstone project using Levenshtein distance for phoneme matching to provide real-time pronunciation feedback, assisting in literacy improvement.",
-      tags: ["Django", "React", "RESTful", "NLP"],
-      metrics: ["Real-time Phoneme Matching", "Levenshtein Algorithm Integration"],
-      image: "/images/ai-reader.png",
-      link: "https://your-capstone-demo.com"
+      description: "Capstone project assisting in literacy improvement. Uses Levenshtein distance for phoneme matching to provide real-time pronunciation feedback. Developed with Django and React.",
+      tags: ["Django", "React", "RESTful", "Levenshtein Distance"],
+      metrics: ["Real-time Phoneme Matching", "NLP Integration"],
+      image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1000",
+      github: "https://github.com/byTkeith"
     },
     {
       id: "biometric",
       title: "Guest Biometric Submission App",
-      description: "Automated biometric and ID form completion app for building management. Diverted traffic via Google API to maintain performance after Render tier changes.",
-      tags: ["JavaScript", "Google API", "Vercel"],
+      description: "Automated biometric and ID form completion app for building management. Cut wait times by 40%. Implemented Google API diversion for traffic management after HTTP portal changes.",
+      tags: ["JavaScript", "Google API", "Vercel", "Automation"],
       metrics: ["40% Wait Time Reduction", "Building Mgmt Automation"],
-      image: "/images/biometric.png",
+      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000",
       link: "https://guest-biometric.vercel.app"
     },
     {
       id: "ai-accommodation",
       title: "AI Guest Relations Engine",
-      description: "A refined website featuring an AI engine where guests can ask questions about accommodations and receive instant, intelligent replies.",
+      description: "A refined accommodation website featuring an AI engine where guests receive intelligent, instant replies about booking and facilities.",
       tags: ["AI Engine", "Secure Login", "Admin Dashboard"],
-      metrics: ["Secure Price Mgmt", "AI Automated Support"],
-      image: "/images/accommodation-ai.png",
+      metrics: ["Secure Price Management", "Automated Guest Support"],
+      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000",
       link: "https://sandton-exclusive.com"
     }
   ],
@@ -112,8 +113,8 @@ export const portfolioData: PortfolioData = {
     { id: "c3", name: "Advanced SQL for Data Science", issuer: "UCT", date: "2024" }
   ],
   honors: [
-    { id: "h1", title: "20% Revenue Preservation", description: "Recognized for high-impact legacy system migration and API implementation.", date: "2024" },
-    { id: "h2", title: "Process Improvement Excellence", description: "Lead consultant for City of Cape Town workflow optimization.", date: "2024" }
+    { id: "h1", title: "20% Revenue Preservation", description: "Recognized for high-impact legacy system migration and API implementation for industrial paint manufacturer.", date: "2024" },
+    { id: "h2", title: "Process Improvement Excellence", description: "Lead consultant for City of Cape Town workflow optimization cutting turnaround by 40%.", date: "2024" }
   ],
   socials: {
     github: "https://github.com/byTkeith",
