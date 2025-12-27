@@ -1,0 +1,7 @@
+{
+  "name": "Tendai Nyevedzanai Portfolio",
+  "description": "A high-performance professional portfolio for a solution-driven Software Engineer with expertise in AI, ERP optimization, and full-stack development.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
