@@ -2,7 +2,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { portfolioData } from "../data";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Fallback to empty string if process is undefined to prevent crash
+const API_KEY = typeof process !== 'undefined' ? process.env.API_KEY : '';
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const SYSTEM_PROMPT = `
 You are the high-value AI Assistant for Tendai K. Nyevedzanai.
@@ -27,6 +29,10 @@ SPECIAL INSTRUCTIONS:
 `;
 
 export async function askResumeAssistant(query: string): Promise<string> {
+  if (!API_KEY) {
+    return "The AI Assistant is currently offline (Missing API Key). Please contact Tendai directly via the Connect section.";
+  }
+  
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
