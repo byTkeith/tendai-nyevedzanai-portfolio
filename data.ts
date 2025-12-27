@@ -105,6 +105,20 @@ export const portfolioData: PortfolioData = {
       metrics: ["Secure Price Management", "Automated Guest Support"],
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000",
       link: "https://sandton-exclusive.com"
+    },
+    {
+      id: "proj-mgmt-csharp",
+      title: "C# Enterprise Project Management",
+      description: "Enterprise tool tracking employee allocation and salary management. Built for high-data integrity using C#, Next.js, and MySQL.",
+      tags: ["C#", "Next.js", "MySQL", "Salary Management"],
+      metrics: ["Employee Tracking", "Automated Payroll Logic"]
+    },
+    {
+      id: "hotel-mgmt",
+      title: "Hotel Booking & Allocation System",
+      description: "Comprehensive hospitality management system for real-time guest booking, room allocation, and service request tracking.",
+      tags: ["Full Stack", "Booking Engine", "Hospitality Tech"],
+      metrics: ["Room Allocation", "Service Integration"]
     }
   ],
   certifications: [
@@ -120,6 +134,6 @@ export const portfolioData: PortfolioData = {
     github: "https://github.com/byTkeith",
     linkedin: "https://www.linkedin.com/in/tendai-nyevedzanai-261007232/",
     email: "keithsolo.sav@gmail.com",
-    profileImage: "/me.png"
+    profileImage: "/me.jpeg"
   }
 };

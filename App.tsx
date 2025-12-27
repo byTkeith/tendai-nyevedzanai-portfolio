@@ -30,10 +30,19 @@ const App: React.FC = () => {
     setChatInput('');
     setIsTyping(true);
 
-    const aiResponse = await askResumeAssistant(userQuery);
-    setIsTyping(false);
-    setChatMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
+    try {
+      const aiResponse = await askResumeAssistant(userQuery);
+      setChatMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
+    } catch (err) {
+      setChatMessages(prev => [...prev, { role: 'ai', text: "I apologize, I'm having trouble connecting right now. Please try again or message Tendai on LinkedIn." }]);
+    } finally {
+      setIsTyping(false);
+    }
   };
+
+  // Separate featured projects from extra projects
+  const featuredProjects = portfolioData.projects.filter(p => p.image);
+  const extraProjects = portfolioData.projects.filter(p => !p.image);
 
   return (
     <div className="min-h-screen">
@@ -48,7 +57,7 @@ const App: React.FC = () => {
             <a href="#skills" className="hover:text-white transition-colors">Skills</a>
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#experience" className="hover:text-white transition-colors">Experience</a>
-            <a href="#contact" className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all font-bold">Get in touch</a>
+            <a href={`mailto:${portfolioData.socials.email}`} className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all font-bold">Hire Me</a>
           </div>
         </div>
       </nav>
@@ -73,7 +82,7 @@ const App: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
             <a href="#projects" className="px-10 py-4 bg-white text-black rounded-xl font-bold hover:bg-gray-200 transition-all shadow-xl shadow-white/5">
-              View Projects
+              View Work
             </a>
             <a href={portfolioData.socials.linkedin} target="_blank" className="px-10 py-4 glass-effect border border-white/10 rounded-xl font-bold hover:bg-white/5 transition-all">
               LinkedIn
@@ -85,7 +94,7 @@ const App: React.FC = () => {
           <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-3xl opacity-20 group-hover:opacity-30 transition duration-1000"></div>
           <div className="relative w-full max-w-md aspect-[4/5] bg-zinc-900 rounded-3xl overflow-hidden glass-effect float-animation shadow-2xl">
              <img 
-                src={portfolioData.socials.profileImage || `https://picsum.photos/seed/tendai/800/1000`} 
+                src={portfolioData.socials.profileImage} 
                 alt={portfolioData.name} 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 onError={(e) => {
@@ -129,15 +138,18 @@ const App: React.FC = () => {
       </Section>
 
       {/* Projects Section */}
-      <Section id="projects" title="Core Impact">
+      <Section id="projects" title="Featured Work">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {portfolioData.projects.map((project) => (
+          {featuredProjects.map((project) => (
             <div key={project.id} className="group glass-effect rounded-3xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all flex flex-col shadow-2xl">
               <div className="aspect-video bg-zinc-900 relative overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-all duration-700 scale-100 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000`;
+                  }}
                 />
                 <div className="absolute top-6 left-6 flex flex-wrap gap-2">
                   {project.tags.map(tag => (
@@ -177,8 +189,37 @@ const App: React.FC = () => {
         </div>
       </Section>
 
+      {/* Additional Projects (No images) */}
+      <Section id="additional-projects" title="Technical Contributions">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {extraProjects.map((project) => (
+            <div key={project.id} className="p-8 glass-effect rounded-[32px] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                   {project.tags.map(tag => (
+                      <span key={tag} className="text-[10px] font-mono text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded-md border border-blue-400/20">{tag}</span>
+                   ))}
+                </div>
+                <h3 className="text-2xl font-black group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed font-medium">{project.description}</p>
+              </div>
+              <div className="mt-8 flex items-center justify-between">
+                <div className="flex gap-4">
+                  {project.metrics?.map((m, i) => (
+                    <span key={i} className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{m}</span>
+                  ))}
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* Experience Timeline */}
-      <Section id="experience" title="Timeline">
+      <Section id="experience" title="Professional Timeline">
         <div className="space-y-8">
           {portfolioData.experience.map((exp) => (
             <div key={exp.id} className="relative group">
@@ -239,57 +280,6 @@ const App: React.FC = () => {
         </div>
       </Section>
 
-      {/* Contact */}
-      <Section id="contact" title="Collaboration" className="pb-40">
-        <div className="grid lg:grid-cols-2 gap-20">
-          <div className="space-y-8">
-            <h3 className="text-5xl font-black tracking-tight">Let's solve the <span className="gradient-text">hard problems</span> together.</h3>
-            <p className="text-gray-400 text-xl leading-relaxed font-medium">
-              Currently engineering at Art of Scale, but always open to discussing technical consultancy, AI implementation, or SAP optimization.
-            </p>
-            <div className="space-y-6 pt-6">
-              <a href={`mailto:${portfolioData.socials.email}`} className="flex items-center gap-6 group">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
-                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" strokeWidth={1.5} /></svg>
-                </div>
-                <div className="text-2xl font-bold group-hover:text-blue-400 transition-all">{portfolioData.socials.email}</div>
-              </a>
-              <a href={portfolioData.socials.linkedin} target="_blank" className="flex items-center gap-6 group">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
-                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </div>
-                <div className="text-2xl font-bold group-hover:text-blue-400 transition-all">LinkedIn Profile</div>
-              </a>
-            </div>
-          </div>
-          <div className="glass-effect p-12 rounded-[40px] border border-white/5">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3">Name</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-500 transition-all font-bold" placeholder="Your Name" />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3">Email</label>
-                  <input type="email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-500 transition-all font-bold" placeholder="Email" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3">Subject</label>
-                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-500 transition-all font-bold" placeholder="Consultancy Inquiry" />
-              </div>
-              <div>
-                <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3">Message</label>
-                <textarea rows={5} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-500 transition-all font-bold" placeholder="Briefly describe the challenge..."></textarea>
-              </div>
-              <button type="submit" className="w-full bg-blue-600 py-6 rounded-2xl text-lg font-black tracking-tight hover:bg-blue-700 transition-all shadow-2xl shadow-blue-500/20">
-                Submit Proposal
-              </button>
-            </form>
-          </div>
-        </div>
-      </Section>
-
       {/* AI Assistant FAB */}
       <div className="fixed bottom-10 right-10 z-[100] flex flex-col items-end gap-6">
         {chatOpen && (
@@ -339,7 +329,7 @@ const App: React.FC = () => {
                   placeholder="Ask about Tendai's projects..."
                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 pr-14 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all placeholder:text-gray-600"
                 />
-                <button type="submit" className="absolute right-3 top-3 p-2 text-blue-500 hover:text-white transition-colors">
+                <button type="submit" className="absolute right-3 top-3 p-2 text-blue-500 hover:text-white transition-colors" disabled={isTyping}>
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
                 </button>
               </div>
@@ -366,7 +356,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
            <div className="text-3xl font-black tracking-tighter">TENDAI<span className="text-blue-500">.</span>NY</div>
            <div className="text-sm font-mono text-gray-500 font-bold uppercase tracking-widest">
-             Built with High Performance in mind. © 2025
+             Built for Impact. © {new Date().getFullYear()}
            </div>
         </div>
       </footer>

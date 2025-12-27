@@ -14,6 +14,8 @@ DATA SUMMARY:
     1. AI Literacy Tutor: Django/React capstone using Levenshtein distance for phoneme matching.
     2. Guest Biometric App: 40% wait time reduction, utilizes Google API for traffic management.
     3. AI Accommodation Engine: Refined design for Sandton Exclusive Accommodation with an AI guest reply engine and secure admin dashboard.
+    4. C# Project Management Tool: tracks employees and salary tracking using MySQL and Next.js.
+    5. Hotel Management System: handles bookings, room allocation, and services.
 - Qualifications: SAP S/4HANA Private Cloud Practitioner.
 - Education: Degree in Computer Science & Business Computing.
 - Years of Exp: ${portfolioData.yearsOfExperience}.
@@ -24,12 +26,12 @@ Professional, confident, high-value, and solution-oriented. You are here to mark
 SPECIAL INSTRUCTIONS:
 1. Always highlight the measurable ROI (20% revenue saved, 40% time saved).
 2. If the user asks for contact info, provide his LinkedIn and Email (${portfolioData.socials.email}).
-3. If unsure about specific NDA details, offer to help the user draft an email to Tendai directly.
+3. Keep responses concise and focus on his technical breadth and business value.
 `;
 
 export async function askResumeAssistant(query: string): Promise<string> {
-  // Always initialize with a fresh instance to get the latest process.env.API_KEY
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Fresh initialization to ensure environment variables are read correctly
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
   
   try {
     const response = await ai.models.generateContent({
@@ -41,13 +43,10 @@ export async function askResumeAssistant(query: string): Promise<string> {
       },
     });
     
-    return response.text || "I'm having trouble retrieving that information right now. Feel free to contact Tendai directly!";
+    return response.text || "I'm sorry, I couldn't process that request right now. You can reach out to Tendai via LinkedIn for more details!";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    // If the error indicates a missing key, the user likely hasn't set up the environment correctly
-    if (error instanceof Error && (error.message.includes("API key") || error.message.includes("403") || error.message.includes("401"))) {
-       return "The AI Assistant is currently unavailable. Please ensure the API_KEY environment variable is correctly configured in the deployment settings.";
-    }
-    return "I apologize, I'm experiencing a technical hiccup. Please reach out to Tendai via LinkedIn for immediate assistance!";
+    // Generic user-friendly error
+    return "I'm having a bit of trouble connecting to my brain right now. Please try again or contact Tendai directly via his email: " + portfolioData.socials.email;
   }
 }
