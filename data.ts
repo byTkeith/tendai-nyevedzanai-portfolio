@@ -15,7 +15,7 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       id: "aos",
-      role: "Software Development Intern",
+      role: "Software Engineer",
       company: "Art of Scale",
       location: "Cape Town",
       duration: "April 2025 - Present",
@@ -32,7 +32,7 @@ export const portfolioData: PortfolioData = {
       role: "Solutions Consultant (NDA)",
       company: "Industrial Paint Manufacturer",
       location: "Remote",
-      duration: "December 2024",
+      duration: "December 2025",
       description: [
         "Preserved 20% of annual revenue by engineering a mission-critical API to migrate legacy flat-files to MySQL.",
         "Eliminated data silos that previously hindered decision-making and live analysis.",
@@ -44,7 +44,7 @@ export const portfolioData: PortfolioData = {
       role: "Project Lead (Consultancy)",
       company: "City of Cape Town",
       location: "Cape Town",
-      duration: "2024",
+      duration: "2025",
       description: [
         "Led process improvement analysis focusing on deep-seated workflow bottlenecks.",
         "Redesigned the SAP HR sick leave workflow, cutting turnaround time by 40% for city-wide personnel management.",
@@ -62,13 +62,13 @@ export const portfolioData: PortfolioData = {
         "Optimized software performance for educational media in an Agile environment.",
         "Engineered Twitch-integrated social gaming elements, improving user engagement metrics."
       ],
-      link: "https://www.twitch.tv/sozolabs",
-      linkText: "View Game on Twitch"
+      link: "https://tenke-keith.itch.io/on-edge",
+      linkText: "View Game on Itch.io"
     },
     {
-      id: "sea",
+      id: "GLAMMYS EXECUTIVE SUITES",
       role: "Web Development Intern",
-      company: "Sandton Exclusive Accommodation",
+      company: "GLAMMYS PRY(LTD)",
       location: "Sandton",
       duration: "2024",
       description: [
@@ -85,7 +85,7 @@ export const portfolioData: PortfolioData = {
       description: "Capstone project assisting in literacy improvement. Uses Levenshtein distance for phoneme matching to provide real-time pronunciation feedback. Developed with Django and React.",
       tags: ["Django", "React", "RESTful", "Levenshtein Distance"],
       metrics: ["Real-time Phoneme Matching", "NLP Integration"],
-      image: "/images/ai-literacy.jpeg",
+      image: "/images/ai-reader.jpeg",
       github: "https://github.com/byTkeith"
     },
     {
@@ -95,7 +95,7 @@ export const portfolioData: PortfolioData = {
       tags: ["JavaScript", "Google API", "Vercel", "Automation"],
       metrics: ["40% Wait Time Reduction", "Building Mgmt Automation"],
       image: "/images/biometric.jpeg",
-      link: "https://guest-biometric.vercel.app"
+      link: "https://tenke-inginuity-guest-registration.vercel.app/"
     },
     {
       id: "ai-accommodation",
@@ -104,7 +104,7 @@ export const portfolioData: PortfolioData = {
       tags: ["AI Engine", "Secure Login", "Admin Dashboard"],
       metrics: ["Secure Price Management", "Automated Guest Support"],
       image: "/images/accommodation.jpeg",
-      link: "https://sandton-exclusive.com"
+      link: "https://glammys-website.vercel.app/"
     },
     {
       id: "proj-mgmt-csharp",
