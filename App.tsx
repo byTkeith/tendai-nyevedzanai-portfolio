@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!chatInput.trim()) return;
+    if (!chatInput.trim() || isTyping) return;
 
     const userQuery = chatInput;
     setChatMessages(prev => [...prev, { role: 'user', text: userQuery }]);
@@ -34,6 +34,7 @@ const App: React.FC = () => {
       const aiResponse = await askResumeAssistant(userQuery);
       setChatMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
     } catch (err) {
+      console.error("Chat error:", err);
       setChatMessages(prev => [...prev, { role: 'ai', text: "I apologize, I'm having trouble connecting right now. Please try again or message Tendai on LinkedIn." }]);
     } finally {
       setIsTyping(false);
@@ -57,7 +58,7 @@ const App: React.FC = () => {
             <a href="#skills" className="hover:text-white transition-colors">Skills</a>
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#experience" className="hover:text-white transition-colors">Experience</a>
-            <a href={`mailto:${portfolioData.socials.email}`} className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all font-bold">Hire Me</a>
+            <a href={`mailto:${portfolioData.socials.email}`} className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all font-bold">Contact</a>
           </div>
         </div>
       </nav>
@@ -137,7 +138,7 @@ const App: React.FC = () => {
         </div>
       </Section>
 
-      {/* Projects Section */}
+      {/* Featured Projects Section */}
       <Section id="projects" title="Featured Work">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {featuredProjects.map((project) => (
@@ -146,7 +147,7 @@ const App: React.FC = () => {
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-all duration-700 scale-100 group-hover:scale-105"
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 scale-100 group-hover:scale-105"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000`;
                   }}

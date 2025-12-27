@@ -14,7 +14,7 @@ DATA SUMMARY:
     1. AI Literacy Tutor: Django/React capstone using Levenshtein distance for phoneme matching.
     2. Guest Biometric App: 40% wait time reduction, utilizes Google API for traffic management.
     3. AI Accommodation Engine: Refined design for Sandton Exclusive Accommodation with an AI guest reply engine and secure admin dashboard.
-    4. C# Project Management Tool: tracks employees and salary tracking using MySQL and Next.js.
+    4. Enterprise Project Management Tool: tracks employees and salary tracking using MySQL and Next.js (built with C#).
     5. Hotel Management System: handles bookings, room allocation, and services.
 - Qualifications: SAP S/4HANA Private Cloud Practitioner.
 - Education: Degree in Computer Science & Business Computing.
@@ -25,13 +25,17 @@ Professional, confident, high-value, and solution-oriented. You are here to mark
 
 SPECIAL INSTRUCTIONS:
 1. Always highlight the measurable ROI (20% revenue saved, 40% time saved).
-2. If the user asks for contact info, provide his LinkedIn and Email (${portfolioData.socials.email}).
+2. If the user asks for contact info, provide his email (${portfolioData.socials.email}) or his LinkedIn.
 3. Keep responses concise and focus on his technical breadth and business value.
 `;
 
 export async function askResumeAssistant(query: string): Promise<string> {
-  // Fresh initialization to ensure environment variables are read correctly
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    return "The AI Assistant is currently in maintenance mode (API Key not detected). Please contact Tendai directly via his email or LinkedIn.";
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   try {
     const response = await ai.models.generateContent({
@@ -43,10 +47,13 @@ export async function askResumeAssistant(query: string): Promise<string> {
       },
     });
     
-    return response.text || "I'm sorry, I couldn't process that request right now. You can reach out to Tendai via LinkedIn for more details!";
+    if (response && response.text) {
+      return response.text;
+    }
+    
+    return "I'm sorry, I couldn't generate a response at this moment. Please reach out to Tendai via LinkedIn for immediate assistance!";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    // Generic user-friendly error
-    return "I'm having a bit of trouble connecting to my brain right now. Please try again or contact Tendai directly via his email: " + portfolioData.socials.email;
+    return "I apologize, but I encountered a technical error while processing your request. Please try again or reach out to Tendai directly.";
   }
 }

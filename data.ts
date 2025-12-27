@@ -85,7 +85,7 @@ export const portfolioData: PortfolioData = {
       description: "Capstone project assisting in literacy improvement. Uses Levenshtein distance for phoneme matching to provide real-time pronunciation feedback. Developed with Django and React.",
       tags: ["Django", "React", "RESTful", "Levenshtein Distance"],
       metrics: ["Real-time Phoneme Matching", "NLP Integration"],
-      image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1000",
+      image: "/images/ai-literacy.jpeg",
       github: "https://github.com/byTkeith"
     },
     {
@@ -94,7 +94,7 @@ export const portfolioData: PortfolioData = {
       description: "Automated biometric and ID form completion app for building management. Cut wait times by 40%. Implemented Google API diversion for traffic management after HTTP portal changes.",
       tags: ["JavaScript", "Google API", "Vercel", "Automation"],
       metrics: ["40% Wait Time Reduction", "Building Mgmt Automation"],
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000",
+      image: "/images/biometric.jpeg",
       link: "https://guest-biometric.vercel.app"
     },
     {
@@ -103,22 +103,22 @@ export const portfolioData: PortfolioData = {
       description: "A refined accommodation website featuring an AI engine where guests receive intelligent, instant replies about booking and facilities.",
       tags: ["AI Engine", "Secure Login", "Admin Dashboard"],
       metrics: ["Secure Price Management", "Automated Guest Support"],
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000",
+      image: "/images/accommodation.jpeg",
       link: "https://sandton-exclusive.com"
     },
     {
       id: "proj-mgmt-csharp",
-      title: "C# Enterprise Project Management",
-      description: "Enterprise tool tracking employee allocation and salary management. Built for high-data integrity using C#, Next.js, and MySQL.",
-      tags: ["C#", "Next.js", "MySQL", "Salary Management"],
-      metrics: ["Employee Tracking", "Automated Payroll Logic"]
+      title: "Enterprise Project Management Tool",
+      description: "Custom management tool using C#, Next.js, and MySQL to track employees, resource allocation, and automated salary/payroll tracking.",
+      tags: ["C#", "Next.js", "MySQL", "Salary Tracking"],
+      metrics: ["Employee Allocation", "Payroll Automation"]
     },
     {
       id: "hotel-mgmt",
-      title: "Hotel Booking & Allocation System",
-      description: "Comprehensive hospitality management system for real-time guest booking, room allocation, and service request tracking.",
-      tags: ["Full Stack", "Booking Engine", "Hospitality Tech"],
-      metrics: ["Room Allocation", "Service Integration"]
+      title: "Hotel Management & Booking System",
+      description: "Robust hotel system for handling real-time bookings, guest allocation, and comprehensive service management.",
+      tags: ["Full Stack", "Hospitality", "Booking Engine"],
+      metrics: ["Booking Logic", "Service Tracking"]
     }
   ],
   certifications: [
@@ -134,6 +134,6 @@ export const portfolioData: PortfolioData = {
     github: "https://github.com/byTkeith",
     linkedin: "https://www.linkedin.com/in/tendai-nyevedzanai-261007232/",
     email: "keithsolo.sav@gmail.com",
-    profileImage: "/me.jpeg"
+    profileImage: "/images/me.jpeg"
   }
 };
