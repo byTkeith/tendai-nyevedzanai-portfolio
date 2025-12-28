@@ -18,8 +18,10 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [chatMessages, isTyping]);
+    if (chatOpen) {
+      scrollToBottom();
+    }
+  }, [chatMessages, isTyping, chatOpen]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,13 +37,12 @@ const App: React.FC = () => {
       setChatMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
     } catch (err) {
       console.error("Chat error:", err);
-      setChatMessages(prev => [...prev, { role: 'ai', text: "I apologize, I'm having trouble connecting right now. Please try again or message Tendai on LinkedIn." }]);
+      setChatMessages(prev => [...prev, { role: 'ai', text: "I apologize, I'm having trouble connecting right now. Please reach out to Tendai on LinkedIn for a direct conversation." }]);
     } finally {
       setIsTyping(false);
     }
   };
 
-  // Separate featured projects from extra projects
   const featuredProjects = portfolioData.projects.filter(p => p.image);
   const extraProjects = portfolioData.projects.filter(p => !p.image);
 
@@ -50,7 +51,7 @@ const App: React.FC = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
+          <div className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity cursor-pointer">
             TENDAI<span className="text-blue-500">.</span>NY
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
@@ -147,7 +148,7 @@ const App: React.FC = () => {
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 scale-100 group-hover:scale-105"
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 scale-100 group-hover:scale-105"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000`;
                   }}
@@ -183,35 +184,6 @@ const App: React.FC = () => {
                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                     </a>
                   )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Additional Projects (No images) */}
-      <Section id="additional-projects" title="Technical Contributions">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {extraProjects.map((project) => (
-            <div key={project.id} className="p-8 glass-effect rounded-[32px] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                   {project.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-mono text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded-md border border-blue-400/20">{tag}</span>
-                   ))}
-                </div>
-                <h3 className="text-2xl font-black group-hover:text-blue-400 transition-colors">{project.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium">{project.description}</p>
-              </div>
-              <div className="mt-8 flex items-center justify-between">
-                <div className="flex gap-4">
-                  {project.metrics?.map((m, i) => (
-                    <span key={i} className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{m}</span>
-                  ))}
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 </div>
               </div>
             </div>
@@ -281,10 +253,39 @@ const App: React.FC = () => {
         </div>
       </Section>
 
+      {/* Additional Projects (No images) at the bottom */}
+      <Section id="additional-projects" title="Technical Contributions">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {extraProjects.map((project) => (
+            <div key={project.id} className="p-8 glass-effect rounded-[32px] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                   {project.tags.map(tag => (
+                      <span key={tag} className="text-[10px] font-mono text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded-md border border-blue-400/20">{tag}</span>
+                   ))}
+                </div>
+                <h3 className="text-2xl font-black group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed font-medium">{project.description}</p>
+              </div>
+              <div className="mt-8 flex items-center justify-between">
+                <div className="flex gap-4">
+                  {project.metrics?.map((m, i) => (
+                    <span key={i} className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{m}</span>
+                  ))}
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* AI Assistant FAB */}
-      <div className="fixed bottom-10 right-10 z-[100] flex flex-col items-end gap-6">
+      <div className="fixed bottom-10 right-10 z-[100] flex flex-col items-end gap-3 md:gap-4">
         {chatOpen && (
-          <div className="w-[380px] h-[550px] bg-[#0c0c0c] rounded-[32px] glass-effect border border-white/10 shadow-[0_32px_64px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+          <div className="w-[calc(100vw-40px)] md:w-[380px] h-[550px] bg-[#0c0c0c] rounded-[32px] glass-effect border border-white/10 shadow-[0_32px_64px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
             <div className="p-6 border-b border-white/10 flex justify-between items-center bg-blue-600/10">
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
@@ -328,7 +329,7 @@ const App: React.FC = () => {
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   placeholder="Ask about Tendai's projects..."
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 pr-14 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all placeholder:text-gray-600"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 pr-14 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all placeholder:text-gray-600 text-white"
                 />
                 <button type="submit" className="absolute right-3 top-3 p-2 text-blue-500 hover:text-white transition-colors" disabled={isTyping}>
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
@@ -338,9 +339,17 @@ const App: React.FC = () => {
           </div>
         )}
         
+        {!chatOpen && (
+          <div className="mb-1 mr-2 px-4 py-2 bg-blue-600 text-white text-[10px] md:text-xs font-black uppercase tracking-widest rounded-full shadow-2xl shadow-blue-600/20 animate-bounce relative whitespace-nowrap pointer-events-none">
+            Ask me anything about Tendai
+            <div className="absolute -bottom-1 right-8 w-2 h-2 bg-blue-600 rotate-45"></div>
+          </div>
+        )}
+
         <button 
           onClick={() => setChatOpen(!chatOpen)}
-          className="group w-20 h-20 bg-blue-600 rounded-[24px] shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-300 ring-8 ring-blue-500/10 relative"
+          className="group w-16 h-16 md:w-20 md:h-20 bg-blue-600 rounded-[24px] shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-300 ring-8 ring-blue-500/10 relative"
+          aria-label="Toggle AI Assistant"
         >
           {chatOpen ? (
             <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
@@ -355,7 +364,7 @@ const App: React.FC = () => {
 
       <footer className="py-20 px-6 border-t border-white/5 mt-40">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="text-3xl font-black tracking-tighter">TENDAI<span className="text-blue-500">.</span>NY</div>
+           <div className="text-3xl font-black tracking-tighter text-white">TENDAI<span className="text-blue-500">.</span>NY</div>
            <div className="text-sm font-mono text-gray-500 font-bold uppercase tracking-widest">
              Built for Impact. © {new Date().getFullYear()}
            </div>
