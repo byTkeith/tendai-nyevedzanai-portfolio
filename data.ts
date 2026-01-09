@@ -27,18 +27,7 @@ export const portfolioData: PortfolioData = {
         "Implementing automated reporting tools to track key performance indicators across distributed teams."
       ]
     },
-    {
-      id: "paint",
-      role: "Solutions Consultant (NDA)",
-      company: "SEAT",
-      location: "Remote",
-      duration: "October 2025",
-      description: [
-        "Preserved 20% of annual revenue by engineering a mission-critical API to migrate legacy flat-files to MySQL.",
-        "Eliminated data silos that previously hindered decision-making and live analysis.",
-        "Improved executive decision-making turnaround time by providing a live, queryable database environment."
-      ]
-    },
+
     {
       id: "cct",
       role: "Project Lead (Consultancy)",
