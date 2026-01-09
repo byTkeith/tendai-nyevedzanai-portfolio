@@ -72,7 +72,7 @@ const App: React.FC = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            Engineering @ Art of Scale
+            Software Engineer
           </div>
           <h1 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter">
             Architecting <br/>
@@ -201,7 +201,7 @@ const App: React.FC = () => {
                   <div className="text-sm font-mono text-blue-500 font-bold mb-2">{exp.duration}</div>
                   <div className="text-gray-500 text-xs font-medium uppercase tracking-widest">{exp.location}</div>
                   {exp.isCurrent && (
-                    <div className="mt-4 inline-block px-3 py-1 bg-blue-500 text-white text-[10px] font-black uppercase rounded-full tracking-tighter">Current Role</div>
+                    <div className="mt-4 inline-block px-3 py-1 bg-blue-500 text-white text-[10px] font-black uppercase rounded-full tracking-tighter">Most Recent Role</div>
                   )}
                 </div>
                 <div className="flex-1 space-y-6">
