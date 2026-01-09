@@ -18,7 +18,7 @@ export const portfolioData: PortfolioData = {
       role: "Software Engineer",
       company: "Art of Scale",
       location: "Cape Town",
-      duration: "April 2025 - Present",
+      duration: "April 2025 - November 2025",
       isCurrent: true,
       description: [
         "Architecting Python-based automation frameworks for high-growth SMEs.",
@@ -30,9 +30,9 @@ export const portfolioData: PortfolioData = {
     {
       id: "paint",
       role: "Solutions Consultant (NDA)",
-      company: "Industrial Paint Manufacturer",
+      company: "SEAT",
       location: "Remote",
-      duration: "December 2025",
+      duration: "October 2025",
       description: [
         "Preserved 20% of annual revenue by engineering a mission-critical API to migrate legacy flat-files to MySQL.",
         "Eliminated data silos that previously hindered decision-making and live analysis.",
@@ -127,7 +127,7 @@ export const portfolioData: PortfolioData = {
     { id: "c3", name: "Advanced SQL for Data Science", issuer: "UCT", date: "2024" }
   ],
   honors: [
-    { id: "h1", title: "20% Revenue Preservation", description: "Recognized for high-impact legacy system migration and API implementation for industrial paint manufacturer.", date: "2024" },
+    { id: "h1", title: "20% Revenue Preservation", description: "Recognized for high-impact legacy system migration and API implementation for SEAT.", date: "2025" },
     { id: "h2", title: "Process Improvement Excellence", description: "Lead consultant for City of Cape Town workflow optimization cutting turnaround by 40%.", date: "2024" }
   ],
   socials: {
