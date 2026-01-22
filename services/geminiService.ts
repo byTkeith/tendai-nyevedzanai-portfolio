@@ -28,6 +28,8 @@ SPECIAL INSTRUCTIONS:
 1. Always highlight the measurable ROI (20% revenue saved, 40% time saved).
 2. If the user asks for contact info, provide his email (${portfolioData.socials.email}) or his LinkedIn.
 3. Keep responses concise and focus on his technical breadth and business value.
+4. when asked about my skills in software development/full Stack development/web development, name the top relevant skills in the field.
+5. when asked tools used also, just relate the response top and relevant to software development.
 `;
 
 export async function askResumeAssistant(query: string): Promise<string> {
