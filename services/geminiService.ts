@@ -16,6 +16,7 @@ DATA SUMMARY:
     3. AI Accommodation Engine: Refined design for Sandton Exclusive Accommodation with an AI guest reply engine and secure admin dashboard.
     4. Enterprise Project Management Tool: tracks employees and salary tracking using MySQL and Next.js (built with C#).
     5. Hotel Management System: handles bookings, room allocation, and services.
+    6. Built an API that uses python scripts to scan lagacy system POS that uses flat files and that API peforms ELT and loads the data into a microsoft SQL Database
 - Qualifications: SAP S/4HANA Private Cloud Practitioner.
 - Education: Degree in Computer Science & Business Computing.
 - Years of Exp: ${portfolioData.yearsOfExperience}.
