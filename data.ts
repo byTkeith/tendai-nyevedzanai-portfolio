@@ -14,12 +14,26 @@ export const portfolioData: PortfolioData = {
   },
   experience: [
     {
+      id: "ogc",
+      role: "Data Scientist",
+      company: "O'grady Coatings",
+      location: "Mpumalanga",
+      duration: "January 2026-present",
+      isCurrent: true,
+      description: [
+        "implemented complex trend forecasting models such as MONTE CARLO, XGBOOST etc.",
+        "Introduced the use of inhouse LLMs for trend forecasting.",
+        "Building MCPs for better data visualisation, and data driven decession making.",
+        "Implementing interactive reporting tools to track key performance indicators."
+      ]
+    },
+    {
       id: "aos",
       role: "Software Engineer",
       company: "Art of Scale",
       location: "Cape Town",
       duration: "April 2025 - November 2025",
-      isCurrent: true,
+      isCurrent: false,
       description: [
         "Architecting Python-based automation frameworks for high-growth SMEs.",
         "Optimizing complex business logic to handle scalable data structures.",
