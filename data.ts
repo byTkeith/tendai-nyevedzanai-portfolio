@@ -29,7 +29,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "aos",
-      role: "Software Engineer",
+      role: "Software Engineer Intern",
       company: "Art of Scale",
       location: "Cape Town",
       duration: "April 2025 - November 2025",
