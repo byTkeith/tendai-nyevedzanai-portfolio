@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [chatMessages, setChatMessages] = useState<{role: 'user' | 'ai', text: string}[]>([
-    { role: 'ai', text: "Hello! I'm Tendai's AI assistant. Ask me about his work at Art of Scale, his 20% revenue preservation project, or his SAP expertise." }
+    { role: 'ai', text: "Hello! I'm Tendai's AI assistant. Ask me about his work experience." }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
